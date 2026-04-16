@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: caterconnect-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Add these in Render dashboard → Environment:
+      # MONGODB_URI
+      # FIREBASE_PROJECT_ID
+      # FIREBASE_PRIVATE_KEY
+      # FIREBASE_CLIENT_EMAIL
+      # CLOUDINARY_CLOUD_NAME
+      # CLOUDINARY_API_KEY
+      # CLOUDINARY_API_SECRET
+      # RAZORPAY_KEY_ID
+      # RAZORPAY_KEY_SECRET
+      # FRONTEND_URL
+      # ADMIN_UIDS
