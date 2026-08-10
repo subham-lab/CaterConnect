@@ -5,6 +5,40 @@ Caterers grow their business. Built with React + Node.js + MongoDB + Firebase.
 
 ---
 
+## Current Deployment Status
+
+- **Frontend**: live on Vercel — https://catererapp.vercel.app
+- **Backend**: running locally, exposed via a temporary Cloudflare tunnel — this
+  only works while the host machine is on. See `scripts/service.sh` below.
+- **Database**: local MongoDB (Homebrew) — not yet on a persistent host.
+
+This is an interim setup. A permanent version needs a MongoDB Atlas cluster and
+the backend deployed to Render (see `backend/render.yaml`); once that's done,
+`VITE_API_URL` on Vercel should point at the Render URL instead of the tunnel.
+
+### Controlling the local backend + tunnel + frontend alias
+
+```bash
+./scripts/service.sh start     # backend + tunnel + frontend all up
+./scripts/service.sh stop      # backend + tunnel killed, frontend alias removed
+./scripts/service.sh restart   # stop then start
+./scripts/service.sh status    # current state of all three
+```
+
+Run from the repo root. `start` automatically re-points the deployed frontend at
+whatever tunnel URL comes up (a new one every time) and redeploys if it changed.
+
+### ⚠️ Security note
+
+`backend/.env` and `frontend/.env` contain live secrets (Firebase Admin key,
+Cloudinary secret, Razorpay secret) and were previously committed to this repo's
+history before a `.gitignore` existed. They are now untracked going forward, but
+anyone who has cloned the repo already has the old values — **treat those
+secrets as compromised and rotate them** (new Firebase service account key, new
+Cloudinary/Razorpay secrets) before this goes to real users.
+
+---
+
 ## Project Structure
 
 ```

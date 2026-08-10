@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(helmet())
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://caterconnect.vercel.app', process.env.FRONTEND_URL]
+    ? [process.env.FRONTEND_URL].filter(Boolean)
     : true,
   credentials: true,
 }))

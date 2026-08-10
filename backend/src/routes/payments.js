@@ -7,9 +7,6 @@ const router   = express.Router()
 
 // ── Create Razorpay order ────────────────────────────────
 router.post('/create-order', authenticate, async (req, res) => {
-  console.log("Creating Razorpay order...")
-  console.log("BODY:", req.body)
-  console.log("USER:", req.user)
   try {
     const { amount, type } = req.body
 
@@ -43,7 +40,6 @@ router.post('/create-order', authenticate, async (req, res) => {
 
     res.json(order)
   } catch (err) {
-    console.log("RAZORPAY ERROR:", err)
     res.status(500).json({ message: err.message })
   }
 })

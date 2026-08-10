@@ -10,10 +10,15 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0', // 🔥 better than true for external access
+    port: 5173, // 🔥 explicitly define (avoids mismatch)
+    strictPort: true, // 🔥 ensures same port always
+    allowedHosts: true, // 🔥 allow all hosts (fixes your error)
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,
+        secure: false,
       },
     },
   },
